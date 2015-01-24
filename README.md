@@ -27,7 +27,7 @@ Usage
 
 Once the extension is installed, simply use it in your code by  :
 
-```
+```php
 <?php
 echo Select2::widget([
 	'name' => 'selection-name', 
@@ -55,7 +55,7 @@ Property
 - `events` the event handlers for the underlying Select2 Javascript plugin.
 
 example :
-```
+```php
 <?php
 use bootui\select2\Select2;
 
@@ -88,7 +88,7 @@ More property see [Select2 Documentation](http://ivaynberg.github.io/select2/#do
 
 example for use a `function` or `object` type :
 
-```
+```php
 <?php
 echo Select2::widget([
 	//jquery inline function
