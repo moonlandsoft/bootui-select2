@@ -1,5 +1,5 @@
 <?php
-namespace bootui\select2;
+namespace moonland\select2;
 
 use yii\web\AssetBundle;
 /**
@@ -10,15 +10,15 @@ use yii\web\AssetBundle;
  */
 class Select2Asset extends AssetBundle
 {
-	public $sourcePath = '@bootui/select2/dist';
+	public $sourcePath = '@moonland/select2/dist';
 	
 	public $css = [
-		'select2.css',
-		'select2-bootstrap.css',
+		'css/select2.css',
+		'css/select2-bootstrap.css',
 	];
 	
 	public $js = [
-		'select2.js',
+		'js/select2.js',
 	];
 	
 	public $depends = [

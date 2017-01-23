@@ -1,5 +1,5 @@
 <?php
-namespace bootui\select2;
+namespace moonland\select2;
 
 use Yii;
 use yii\helpers\Html;
@@ -56,7 +56,7 @@ class Select2 extends InputWidget
 	const LARGE = 'lg';
 	const SMALL = 'sm';
 	
-	protected $clientOptions = [];
+	public $clientOptions = [];
 	
 	public $multiple = false;
 	
@@ -122,10 +122,11 @@ class Select2 extends InputWidget
 			$this->hasGroup = true;
 		
 		if (isset($this->addon['append']) && !isset($this->addon['prepend']))
-			Html::addCssClass($this->options, 'in-left');
-
-		if (isset($this->addon['prepend']) && !isset($this->addon['append']))
-			Html::addCssClass($this->options, 'in-right');
+			Html::addCssClass($this->groupOptions, 'addon-left');
+		elseif (isset($this->addon['prepend']) && !isset($this->addon['append']))
+			Html::addCssClass($this->groupOptions, 'addon-right');
+		else 
+			Html::addCssClass($this->groupOptions, 'addon-both');
 		
 		if (isset($this->size) && in_array($this->size, ['lg', 'sm'])) {
 			Html::addCssClass($this->options, 'input-' . $this->size);
@@ -244,20 +245,22 @@ class Select2 extends InputWidget
 	protected function registerPlugin()
 	{
 		$view = $this->getView();
-		if (isset($this->language))
-			Select2Asset::register($view)->js[] = 'select2_locale_' . $this->language . '.js';
-		else 
+		if (isset($this->language) && is_string($this->language))
+			Select2Asset::register($view)->js[] = 'js/i18n/' . $this->language . '.js';
+		else {
+			$this->clientOptions['language'] = $this->language;
 			Select2Asset::register($view);
+		}
 		
 		$selector = $this->options['id'];
 		
-		$options = !empty($this->clientOptions) ? JSON::encode($this->clientOptions) : '';
+		$options = !empty($this->clientOptions) ? \yii\helpers\Json::encode($this->clientOptions) : '';
 		
 		$view->registerJs("jQuery('#$selector').select2({$options});");
 		
 		if (!empty($this->events)) {
 			$js = [];
-			foreach ($this->jsEvents as $event => $handler) {
+			foreach ($this->events as $event => $handler) {
 				$js[] = "jQuery('#$selector').on('$event', $handler);";
 			}
 			$view->registerJs(implode("\n", $js));
