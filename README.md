@@ -57,7 +57,7 @@ Property
 example :
 ```php
 <?php
-use bootui\select2\Select2;
+use moonland\select2\Select2;
 
 echo $form->field($model, 'attribute1')->widget(Select2::className(), [
 	'items' => ['first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'], 
@@ -92,12 +92,12 @@ example for use a `function` or `object` type :
 <?php
 echo Select2::widget([
 	//jquery inline function
-	'formatResult' => 'function format(state) { if (!state.id) return state.text;return "" + state.text;}',
+	'formatResult' => new JsExpression('function format(state) { if (!state.id) return state.text;return "" + state.text;}'),
 
 	//call existing function
-	'formatSelection' => 'js:formatSelection()',
+	'formatSelection' => new JsExpression('formatSelection()'),
 
 	//object
-	'data' => 'js:[{id:0,text:"enhancement"},{id:1,text:"bug"},{id:2,text:"duplicate"},{id:3,text:"invalid"},{id:4,text:"wontfix"}]',
+	'data' => new JsExpression('[{id:0,text:"enhancement"},{id:1,text:"bug"},{id:2,text:"duplicate"},{id:3,text:"invalid"},{id:4,text:"wontfix"}]'),
 ]);
 ```
