@@ -11,8 +11,7 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "*",
-        "moonlandsoft/helpers": "*"
+        "yiisoft/yii2": "*"
     },
     "autoload": {
         "psr-4": {

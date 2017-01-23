@@ -4,7 +4,6 @@ namespace moonland\select2;
 use Yii;
 use yii\helpers\Html;
 use yii\widgets\InputWidget;
-use moonland\helpers\JSON;
 /**
  * Bootstrap select2
  * -----------------
